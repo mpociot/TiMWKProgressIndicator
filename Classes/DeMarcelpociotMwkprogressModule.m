@@ -130,4 +130,13 @@
     [MWKProgressIndicator showErrorMessage:[TiUtils stringValue:args]];
 }
 
+-(id)showMessageWithColorDuration:(id)args
+{
+    ENSURE_UI_THREAD_1_ARG(args);
+    ENSURE_SINGLE_ARG(args, NSDictionary);
+	CGFloat duration = [TiUtils floatValue:[args objectForKey:@"duration"]];
+	UIColor *color = [[TiUtils colorValue:[args objectForKey:@"color"]]_color];
+	[MWKProgressIndicator showColor:color duration:duration message:[args objectForKey:@"message"]];
+}
+
 @end

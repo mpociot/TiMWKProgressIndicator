@@ -5,3 +5,13 @@ build
 *.pyc
 *.pyo
 .DS_Store
+
+TiMWKProgressIndicator.xcodeproj/xcuserdata/steven.xcuserdatad/xcschemes/xcschememanagement.plist
+
+TiMWKProgressIndicator.xcodeproj/xcuserdata/steven.xcuserdatad/xcschemes/Build & Test.xcscheme
+
+TiMWKProgressIndicator.xcodeproj/project.xcworkspace/xcuserdata/steven.xcuserdatad/UserInterfaceState.xcuserstate
+
+TiMWKProgressIndicator.xcodeproj/xcuserdata/steven.xcuserdatad/xcdebugger/Breakpoints_v2.xcbkptlist
+
+TiMWKProgressIndicator.xcodeproj/xcuserdata/steven.xcuserdatad/xcschemes/TiMWKProgressIndicator.xcscheme
