@@ -179,6 +179,11 @@
     [[MWKProgressIndicator sharedIndicator] showWithColor:color duration:duration message:message];
 }
 
++ (void)showMessage:(NSString *)message color: (UIColor *)color
+{
+    [[MWKProgressIndicator sharedIndicator] showWithColor:color message:message];
+}
+
 - (void)showWithColor:(UIColor *)color duration:(float)duration message:(NSString *)message
 {
     if (_lock) return;
@@ -213,6 +218,14 @@
                                           });
                        });
     });
+}
+
+- (void)showWithColor:(UIColor *)color message:(NSString *)message
+{
+	[self updateProgress:0.0];
+	[self setTopLocationValue:0];
+	self.backgroundColor = color;
+	[self updateMessage:message];
 }
 
 + (void)setTrackColor:(UIColor *)color

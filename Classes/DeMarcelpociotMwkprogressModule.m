@@ -89,6 +89,13 @@
     }
 }
 
+-(id)showMessageWithColor:(id)args
+{
+    ENSURE_UI_THREAD_1_ARG(args);
+    ENSURE_SINGLE_ARG(args, NSDictionary);
+	[MWKProgressIndicator showMessage:[args objectForKey:@"message"] color:[[TiUtils colorValue:[args objectForKey:@"color"]]_color]];
+}
+
 -(id)dismiss:(id)args
 {
     ENSURE_UI_THREAD(dismiss, args);
