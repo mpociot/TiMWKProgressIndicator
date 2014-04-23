@@ -18,6 +18,7 @@ typedef NS_ENUM(NSInteger, MWKProgressMessageUpdateType)
 @interface MWKProgressIndicator : UIView
 
 + (void)show;
++ (void)showMessage:(NSString *)message color: (UIColor *)color;
 
 + (void)dismiss;
 + (void)dismissWithoutAnimation;

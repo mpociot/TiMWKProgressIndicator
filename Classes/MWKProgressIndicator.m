@@ -11,7 +11,7 @@
 #import <AVFoundation/AVFoundation.h>
 
 #define MWKProgressIndicatorHeight 64.0f
-
+#define statusBarHeight 14.0f
 @implementation MWKProgressIndicator
 {
     float _progress;
@@ -39,7 +39,8 @@
     if (!self) return nil;
     
     self.backgroundColor = [UIColor whiteColor];
-    self.frame = CGRectMake(0, -MWKProgressIndicatorHeight, [UIScreen mainScreen].bounds.size.width, MWKProgressIndicatorHeight);
+	CGFloat screenWidth=[MWKProgressIndicator getScreenWidth];
+	self.frame = CGRectMake(0, -MWKProgressIndicatorHeight, screenWidth, MWKProgressIndicatorHeight);
     [[[[[UIApplication sharedApplication] keyWindow] subviews] firstObject] addSubview:self];
     
     _progress = 0.0;
@@ -47,9 +48,7 @@
     [_progressTrack setBackgroundColor:[UIColor colorWithRed:0.53 green:0.82 blue:1 alpha:1]];
     [self addSubview:_progressTrack];
     
-    float statusBarHeight = 14.0f;
-    
-    _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, statusBarHeight, self.bounds.size.width, MWKProgressIndicatorHeight - statusBarHeight)];
+	_titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, statusBarHeight, screenWidth, MWKProgressIndicatorHeight - statusBarHeight)];
     [_titleLabel setBackgroundColor:[UIColor clearColor]];
     [_titleLabel setTextColor:[UIColor blackColor]];
     [_titleLabel setTextAlignment:NSTextAlignmentCenter];
@@ -58,6 +57,8 @@
     [self addSubview:_titleLabel];
     
     _lock = NO;
+
+	[[NSNotificationCenter defaultCenter] addObserver:self  selector:@selector(orientationChanged:)  name:UIDeviceOrientationDidChangeNotification  object:nil];
     
     return self;
 }
@@ -178,6 +179,11 @@
     [[MWKProgressIndicator sharedIndicator] showWithColor:color duration:duration message:message];
 }
 
++ (void)showMessage:(NSString *)message color: (UIColor *)color
+{
+    [[MWKProgressIndicator sharedIndicator] showWithColor:color message:message];
+}
+
 - (void)showWithColor:(UIColor *)color duration:(float)duration message:(NSString *)message
 {
     if (_lock) return;
@@ -214,6 +220,14 @@
     });
 }
 
+- (void)showWithColor:(UIColor *)color message:(NSString *)message
+{
+	[self updateProgress:0.0];
+	[self setTopLocationValue:0];
+	self.backgroundColor = color;
+	[self updateMessage:message];
+}
+
 + (void)setTrackColor:(UIColor *)color
 {
     [[MWKProgressIndicator sharedIndicator] updateTrackColor:color];
@@ -239,5 +253,20 @@
     
     [synthesizer speakUtterance:utterance];
 }
+
+- (void)orientationChanged:(NSNotification *)notification
+{
+	    CGFloat screenWidth=[MWKProgressIndicator getScreenWidth];
+	
+	    self.frame = CGRectMake(0, -MWKProgressIndicatorHeight, screenWidth,
+								 +                            MWKProgressIndicatorHeight);
+	    _titleLabel.frame=CGRectMake(0, statusBarHeight, screenWidth, MWKProgressIndicatorHeight - statusBarHeight);
+	}
+
++(CGFloat)getScreenWidth
+{
+	    if (UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation)) return [UIScreen mainScreen].bounds.size.height;
+	    return [UIScreen mainScreen].bounds.size.width;
+	}
 
 @end
