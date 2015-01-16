@@ -79,7 +79,7 @@
 
 #pragma Public APIs
 
--(id)show:(id)args
+-(void)show:(id)args
 {
     ENSURE_UI_THREAD(show, args);
     [MWKProgressIndicator show];
@@ -89,55 +89,62 @@
     }
 }
 
--(id)showMessageWithColor:(id)args
+-(void)showMessageWithColor:(id)args
 {
     ENSURE_UI_THREAD_1_ARG(args);
     ENSURE_SINGLE_ARG(args, NSDictionary);
 	[MWKProgressIndicator showMessage:[args objectForKey:@"message"] color:[[TiUtils colorValue:[args objectForKey:@"color"]]_color]];
 }
 
--(id)dismiss:(id)args
+-(void)dismiss:(id)args
 {
-    ENSURE_UI_THREAD(dismiss, args);
-    [MWKProgressIndicator dismiss];
+	ENSURE_UI_THREAD(dismiss, args);
+	[MWKProgressIndicator dismiss];
 }
 
 
--(id)updateTrackColor:(id)args
-{
-    ENSURE_UI_THREAD_1_ARG(args);
-    [MWKProgressIndicator setTrackColor:[TiUtils colorValue:args].color];
-}
+//-(id)updateTrackColor:(id)color
+//{
+//    ENSURE_UI_THREAD_1_ARG(color);
+//	[MWKProgressIndicator setTrackColor:[[TiUtils colorValue:color] _color]];
+//}
 
--(id)updateProgress:(id)args
+-(void)updateProgress:(id)args
 {
     ENSURE_UI_THREAD_1_ARG(args);
     ENSURE_SINGLE_ARG(args,NSNumber);
     [MWKProgressIndicator updateProgress:[args floatValue]];
 }
 
--(id)updateMessage:(id)args
+-(void)updateProgressWithColor:(id)args
+{
+    ENSURE_UI_THREAD_1_ARG(args);
+    ENSURE_SINGLE_ARG(args, NSDictionary);
+    [MWKProgressIndicator updateProgress:[TiUtils floatValue:[args objectForKey:@"value"]] color: [[TiUtils colorValue:[args objectForKey:@"color"]]_color]];
+}
+
+-(void)updateMessage:(id)args
 {
     ENSURE_UI_THREAD_1_ARG(args);
     ENSURE_SINGLE_ARG(args,NSString);
     [MWKProgressIndicator updateMessage:[TiUtils stringValue:args]];
 }
 
--(id)showSuccessMessage:(id)args
+-(void)showSuccessMessage:(id)args
 {
     ENSURE_UI_THREAD_1_ARG(args);
     ENSURE_SINGLE_ARG(args, NSString);
     [MWKProgressIndicator showSuccessMessage:[TiUtils stringValue:args]];
 }
 
--(id)showErrorMessage:(id)args
+-(void)showErrorMessage:(id)args
 {
     ENSURE_UI_THREAD_1_ARG(args);
     ENSURE_SINGLE_ARG(args, NSString);
     [MWKProgressIndicator showErrorMessage:[TiUtils stringValue:args]];
 }
 
--(id)showMessageWithColorDuration:(id)args
+-(void)showMessageWithColorDuration:(id)args
 {
     ENSURE_UI_THREAD_1_ARG(args);
     ENSURE_SINGLE_ARG(args, NSDictionary);

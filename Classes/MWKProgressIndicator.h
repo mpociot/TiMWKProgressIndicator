@@ -25,6 +25,7 @@ typedef NS_ENUM(NSInteger, MWKProgressMessageUpdateType)
 
 /// Update progress from 0.0 -> 1.0
 + (void)updateProgress:(float)progress;
++ (void)updateProgress:(float)progress color: (UIColor *)color;
 
 /// Updates message
 + (void)updateMessage:(NSString *)message;
@@ -41,7 +42,7 @@ typedef NS_ENUM(NSInteger, MWKProgressMessageUpdateType)
 /// Convenience message for speaking
 + (void)speakMessage:(NSString *)message;
 
-+ (void)setTrackColor:(UIColor *)color;
+//+ (void)setTrackColor:(UIColor *)color;
 + (void)showColor:(UIColor *)color duration:(float)duration message:(NSString *)message;
 
 @end

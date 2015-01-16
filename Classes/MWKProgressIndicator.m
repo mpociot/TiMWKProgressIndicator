@@ -118,6 +118,13 @@
     [indicator updateProgress:progress];
 }
 
++ (void)updateProgress:(float)progress color: (UIColor *)color
+{
+    MWKProgressIndicator *indicator = [MWKProgressIndicator sharedIndicator];
+    [indicator updateTrackColor:color];
+    [indicator updateProgress:progress];
+}
+
 - (void)updateProgress:(float)progress
 {
     if (0.0f <= progress && progress < 1.1f)
@@ -228,14 +235,16 @@
 	[self updateMessage:message];
 }
 
-+ (void)setTrackColor:(UIColor *)color
-{
-    [[MWKProgressIndicator sharedIndicator] updateTrackColor:color];
-}
+//+ (void)setTrackColor:(UIColor *)color
+//{
+//    [[MWKProgressIndicator sharedIndicator] updateTrackColor:color];
+//}
 
 - (void)updateTrackColor:(UIColor *)color
 {
-    _progressTrack.backgroundColor = color;
+//    _progressTrack.backgroundColor = color;
+    [_progressTrack setBackgroundColor: color];
+
 }
 
 + (void)speakMessage:(NSString *)message
