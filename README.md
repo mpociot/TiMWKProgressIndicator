@@ -14,7 +14,7 @@ A minimal progress indicator for iOS with status update support. Displays above 
 	indicator.show();
 	indicator.updateMessage("We're nearly done");
 	indicator.updateProgress( 0.5 );
-	indicator.showMessageWithColorDuration({message: 'Loading more posts...', duration: 2, color: '#789123'});
+	indicator.showMessageWithColorDuration({message: 'Loading more posts...', duration: 2, color: '#789123', textColor: '#ffffff'});
 
 ## Functions
 

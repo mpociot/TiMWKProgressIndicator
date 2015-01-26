@@ -92,8 +92,9 @@
 -(void)showMessageWithColor:(id)args
 {
     ENSURE_UI_THREAD_1_ARG(args);
+//	ENSURE_UI_THREAD(showMessageWithColor, args);
     ENSURE_SINGLE_ARG(args, NSDictionary);
-	[MWKProgressIndicator showMessage:[args objectForKey:@"message"] color:[[TiUtils colorValue:[args objectForKey:@"color"]]_color]];
+	[MWKProgressIndicator showMessage:[args objectForKey:@"message"] color:[[TiUtils colorValue:[args objectForKey:@"color"]]_color] textcolor:[[TiUtils colorValue:[args objectForKey:@"textColor"]]_color]];
 }
 
 -(void)dismiss:(id)args
@@ -150,7 +151,8 @@
     ENSURE_SINGLE_ARG(args, NSDictionary);
 	CGFloat duration = [TiUtils floatValue:[args objectForKey:@"duration"]];
 	UIColor *color = [[TiUtils colorValue:[args objectForKey:@"color"]]_color];
-	[MWKProgressIndicator showColor:color duration:duration message:[args objectForKey:@"message"]];
+	UIColor *textcolor = [[TiUtils colorValue:[args objectForKey:@"textColor"]]_color];
+	[MWKProgressIndicator showColor:color duration:duration message:[args objectForKey:@"message"] textcolor:textcolor];
 }
 
 @end

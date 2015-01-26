@@ -31,7 +31,7 @@ win.addEventListener('click', function(e){
         indicator.show();
       break;
   		case 1:
-  			indicator.showMessageWithColor({message:'loaded you data', color:'#defabc'});
+  			indicator.showMessageWithColor({message:'loaded you data', color:'#defabc', textColor: '#456123'});
   		break;
   		case 2:
   			progress = 0;
@@ -51,7 +51,7 @@ win.addEventListener('click', function(e){
         indicator.showErrorMessage("Booooooo!");
       break;
       case 7:
-        indicator.showMessageWithColorDuration({message: 'Loading more posts...', duration: 2, color: '#789123'});
+        indicator.showMessageWithColorDuration({message: 'Loading more posts...', duration: 2, color: '#789123', textColor: '#defabc'});
       break;
   	}
   });

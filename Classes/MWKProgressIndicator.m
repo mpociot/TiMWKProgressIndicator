@@ -171,27 +171,35 @@
                    });
 }
 
+- (void)updateTextColor:(UIColor *)color
+{
+	dispatch_async(dispatch_get_main_queue(), ^
+				   {
+					   _titleLabel.textColor = color;
+				   });
+}
+
 + (void)showErrorMessage:(NSString *)errorMessage
 {
-    [[MWKProgressIndicator sharedIndicator] showWithColor:[UIColor redColor] duration:2 message:errorMessage];
+    [[MWKProgressIndicator sharedIndicator] showWithColor:[UIColor redColor] duration:2 message:errorMessage textcolor:[UIColor blackColor]];
 }
 
 + (void)showSuccessMessage:(NSString *)successMessage
 {
-    [[MWKProgressIndicator sharedIndicator] showWithColor:[UIColor greenColor] duration:2 message:successMessage];
+    [[MWKProgressIndicator sharedIndicator] showWithColor:[UIColor greenColor] duration:2 message:successMessage textcolor:[UIColor blackColor]];
 }
 
-+ (void)showColor:(UIColor *)color duration:(float)duration message:(NSString *)message
++ (void)showColor:(UIColor *)color duration:(float)duration message:(NSString *)message textcolor:(UIColor *)textColor
 {
-    [[MWKProgressIndicator sharedIndicator] showWithColor:color duration:duration message:message];
+    [[MWKProgressIndicator sharedIndicator] showWithColor:color duration:duration message:message textcolor:textColor];
 }
 
-+ (void)showMessage:(NSString *)message color: (UIColor *)color
++ (void)showMessage:(NSString *)message color: (UIColor *)color textcolor:(UIColor *)textColor
 {
-    [[MWKProgressIndicator sharedIndicator] showWithColor:color message:message];
+    [[MWKProgressIndicator sharedIndicator] showWithColor:color message:message textcolor:textColor];
 }
 
-- (void)showWithColor:(UIColor *)color duration:(float)duration message:(NSString *)message
+- (void)showWithColor:(UIColor *)color duration:(float)duration message:(NSString *)message textcolor:(UIColor *)textColor
 {
     if (_lock) return;
     
@@ -209,6 +217,7 @@
                            
                            [self setTopLocationValue:0 withDuration:hideDuration];
                            self.backgroundColor = color;
+						   [self updateTextColor:textColor];
                            [self updateMessage:message];
                        });
         
@@ -227,11 +236,12 @@
     });
 }
 
-- (void)showWithColor:(UIColor *)color message:(NSString *)message
+- (void)showWithColor:(UIColor *)color message:(NSString *)message textcolor:(UIColor *)textColor
 {
 	[self updateProgress:0.0];
 	[self setTopLocationValue:0];
 	self.backgroundColor = color;
+	[self updateTextColor:textColor];
 	[self updateMessage:message];
 }
 
