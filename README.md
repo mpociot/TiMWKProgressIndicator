@@ -71,9 +71,9 @@ Option
 
 Type: `Dictionary`  
 
-{message: 'Loading more posts...', duration: 2, color: '#789123'}
+{message: 'Loading more posts...', duration: 2, color: '#789123', textColor: '#defabc'}
 
-Show a message indicator with the specified message, color and duration.
+Show a message indicator with the specified message, color and duration. The textColor is optional, if not specified '#000000' is used.
 
 
 ABOUT THE AUTHOR
