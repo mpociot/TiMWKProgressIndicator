@@ -284,7 +284,7 @@
 
 +(CGFloat)getScreenWidth
 {
-	    if (UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation)) return [UIScreen mainScreen].bounds.size.height;
+	    //if (UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation)) return [UIScreen mainScreen].bounds.size.height;
 	    return [UIScreen mainScreen].bounds.size.width;
 	}
 
